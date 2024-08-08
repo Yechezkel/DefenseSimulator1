@@ -1,0 +1,68 @@
+﻿
+
+
+@model IEnumerable<DefenseSimulator.Models.Threat>
+
+@{
+    ViewData["Title"] = "Soldier";
+}
+
+
+<h1>Soldier</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ThreatId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Origin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LaunchTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weapon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ThreatId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Origin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LaunchTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Weapon.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ThreatId">Edit</a> |
+                    @if (item.IsActive)
+                    {
+                        <a asp-controller="Responses" asp-action="Create" asp-route-threatId="@item.ThreatId">respond</a>
+                    }
+                    <a asp-action="Delete" asp-route-id="@item.ThreatId">Delete</a>
+                </td>
+            </tr>
+        }
+        <p>
+            <a asp-action="Create">Create A New Threat</a>
+        </p>
+    </tbody>
+</table>
